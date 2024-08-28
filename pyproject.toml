@@ -15,6 +15,13 @@ python-jose = {extras = ["cryptography"], version = "^3.3.0"}
 passlib = {extras = ["bcrypt"], version = "^1.7.4"}
 python-multipart = "^0.0.9"
 python-dotenv = "^1.0.1"
+fastapi-mail = "^1.4.1"
+fastapi-limiter = "^0.1.6"
+cloudinary = "^1.41.0"
+redis = "^5.0.8"
+libgravatar = "^1.0.4"
+aioredis = "^2.0.1"
+setuptools = "^74.0.0"
 
 
 [build-system]

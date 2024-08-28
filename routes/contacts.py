@@ -1,4 +1,5 @@
 from fastapi import Depends, HTTPException, status, APIRouter
+from fastapi_limiter.depends import RateLimiter
 from sqlalchemy.orm import Session
 from db.connect_db import get_db
 from db.models import User
@@ -9,7 +10,8 @@ from services.auth import auth_services
 router = APIRouter(prefix='/contacts')
 
 
-@router.post('/', response_model=Contact, status_code=status.HTTP_201_CREATED)
+@router.post('/', response_model=Contact, status_code=status.HTTP_201_CREATED,
+             dependencies=[Depends(RateLimiter(times=5, seconds=60))])
 def create_contact(contact: ContactCreate, db: Session = Depends(get_db),
                    current_user: User = Depends(auth_services.get_current_user)):
     db_contact = contacts.create_contact(db=db, contact=contact, user=current_user)
